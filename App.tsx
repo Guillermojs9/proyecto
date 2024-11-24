@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Image, View, ScrollView } from 'react-native';
+import { Image, View, ScrollView } from 'react-native';
 import { Movie } from './src/Movie';
 import React, { useEffect, useState } from 'react';
 import { fetchMovies } from './src/FetchAxios';
@@ -8,8 +8,8 @@ export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   useEffect(() => {
     (async function () {
-      const movies = await fetchMovies();
-      setMovies(movies);
+      const response = await fetchMovies();
+      setMovies(response);
     })();
   }, []);
   return (
