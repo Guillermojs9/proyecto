@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Image, View } from 'react-native';
+import { FlatList, StyleSheet, Image, View, ScrollView } from 'react-native';
 import { Movie } from './src/Movie';
 import React, { useEffect, useState } from 'react';
 import { fetchMovies } from './src/FetchAxios';
@@ -13,16 +13,17 @@ export default function App() {
   }, []);
   return (
     <View style={styles.container}>
-      <FlatList
-        data={movies}
-        renderItem={({ item }) => <Image
-        style={styles.Image}
-          source={{
-            uri: `https://image.tmdb.org/t/p/original${item.poster}`,
-          }}
-        />}
-        keyExtractor={item => "p" + item.id}
-      />
+      <ScrollView horizontal={true}>
+        {movies.map((item) => (
+          <Image
+            key={item.id.toString()}
+            style={styles.Image}
+            source={{
+              uri: `https://image.tmdb.org/t/p/original${item.poster}`,
+            }}
+          />
+        ))}
+      </ScrollView>
     </View>
   );
 }
@@ -35,7 +36,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   Image: {
-    height: 500,
-    width: 300
+    width: 270,
+    height: 405,
+    marginTop: 20,
+    margin: 3,
+  },
+  ScrollView: {
+    height: 400,
   }
 });
