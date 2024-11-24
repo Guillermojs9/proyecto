@@ -2,21 +2,17 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Movie } from './src/Movie';
 import { Result } from './src/dataMovies';
+import { movieMapper } from './src/movieMapper';
+const url_base = "https://api.themoviedb.org/3/movie/now_playing";
+const api_key = "c76ed6d50b96d2bfc0920abaeade0be3";
 
-let movies: Movie[];
-async function datos() {
-  const data = await fetch("https://api.themoviedb.org/3/movie/now_playing?api_key=c76ed6d50b96d2bfc0920abaeade0be3");
+(async function datos() {
+  const data = await fetch(`${url_base}?api_key=${api_key}`);
   const jsonData = await data.json();
-  movies = jsonData.results.map((item: Result) => movieMapper(item));
+  const movies: Movie[] = jsonData.results.map((item: Result) => movieMapper(item));
   console.log(movies);
-}
-datos();
-function movieMapper(item: Result): Movie {
-  return {
-    id: item.id,
-    title: item.title,
-  }
-}
+})();
+
 export default function App() {
   return (
     <View style={styles.container}>
