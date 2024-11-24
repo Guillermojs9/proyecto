@@ -2,6 +2,7 @@ import { FlatList, StyleSheet, Image, View, ScrollView } from 'react-native';
 import { Movie } from './src/Movie';
 import React, { useEffect, useState } from 'react';
 import { fetchMovies } from './src/FetchAxios';
+import { styles } from './src/Styles';
 
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -27,21 +28,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  Image: {
-    width: 270,
-    height: 405,
-    marginTop: 20,
-    margin: 3,
-  },
-  ScrollView: {
-    height: 400,
-  }
-});
